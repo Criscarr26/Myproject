@@ -1,37 +1,37 @@
-# Recomendador de productos
+# Product recommender
 
-Sistema de recomendación de productos en Python usando **filtrado colaborativo
-item-item**: a partir del historial de compras se construye una matriz
-cliente-producto, se calcula la **similitud coseno** entre productos y se
-recomiendan los más parecidos a los que el cliente ya compró.
+Product recommendation system in Python using **item-item collaborative
+filtering**: from purchase history it builds a customer-product matrix,
+computes the **cosine similarity** between products and recommends the ones
+most similar to what the customer already bought.
 
-## Cómo funciona
+## How it works
 
-1. El historial de compras se convierte en una matriz cliente x producto
-   (pivot table con pandas).
-2. Se calcula la similitud coseno entre las columnas (productos): dos productos
-   son similares si los compran los mismos clientes.
-3. Para un cliente dado, se suman las similitudes de cada producto con todo lo
-   que ya compró, se excluyen sus compras previas y se devuelven los 5 mejores.
+1. The purchase history is turned into a customer x product matrix
+   (pivot table with pandas).
+2. Cosine similarity is computed between the columns (products): two products
+   are similar if the same customers buy them.
+3. For a given customer, the similarities of every product with everything they
+   already bought are summed, previous purchases are excluded and the top 5 are returned.
 
-## Uso
+## Usage
 
 ```bash
 pip install -r requirements.txt
 python recomendaciones.py
 ```
 
-El script incluye un historial de ejemplo y muestra las recomendaciones para
-cada cliente. Para usar datos propios, reemplaza `DATA` con registros
-`{"customer_id": ..., "product_id": ...}`.
+The script includes a sample history and prints the recommendations for each
+customer. To use your own data, replace `DATA` with
+`{"customer_id": ..., "product_id": ...}` records.
 
 ```python
 from recomendaciones import build_matrices, suggest_products
 
-customer_product, similarity_df = build_matrices(mis_datos)
-print(suggest_products(cliente_id, customer_product, similarity_df))
+customer_product, similarity_df = build_matrices(my_data)
+print(suggest_products(customer_id, customer_product, similarity_df))
 ```
 
-## Licencia
+## License
 
 [MIT](LICENSE)
